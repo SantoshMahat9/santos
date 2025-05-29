@@ -1,0 +1,1326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyShop | Premium Online Store</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        shopify: {
+                            green: '#f35b0f',
+                            dark: '#f65707',
+                        },
+                        primary: {
+                            DEFAULT: '#E74C3C',
+                            dark: '#C0392B',
+                            light: '#FDEDEC',
+                        },
+                        secondary: '#2C3E50',
+                        accent: '#F39C12',
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+                        'zoom-in': 'zoomIn 0.8s ease-out forwards',
+                        'bounce': 'bounce 2s infinite',
+                        'pulse-slow': 'pulse 3s infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'shake': 'shake 0.5s ease-in-out',
+                        'tada': 'tada 1s ease',
+                        'flip': 'flip 1s ease',
+                        'swing': 'swing 1s ease',
+                        'rubber-band': 'rubberBand 1s ease',
+                        'wobble': 'wobble 1s ease',
+                        'jello': 'jello 1s ease',
+                        'heartbeat': 'heartbeat 1.5s ease infinite',
+                        'bounce-in': 'bounceIn 1s ease',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        zoomIn: {
+                            '0%': { opacity: '0', transform: 'scale(0.9)' },
+                            '100%': { opacity: '1', transform: 'scale(1)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        shake: {
+                            '0%, 100%': { transform: 'translateX(0)' },
+                            '10%, 30%, 50%, 70%, 90%': { transform: 'translateX(-10px)' },
+                            '20%, 40%, 60%, 80%': { transform: 'translateX(10px)' },
+                        },
+                        tada: {
+                            '0%': { transform: 'scale(1)' },
+                            '10%, 20%': { transform: 'scale(0.9) rotate(-3deg)' },
+                            '30%, 50%, 70%, 90%': { transform: 'scale(1.1) rotate(3deg)' },
+                            '40%, 60%, 80%': { transform: 'scale(1.1) rotate(-3deg)' },
+                            '100%': { transform: 'scale(1) rotate(0)' },
+                        },
+                        flip: {
+                            '0%': { transform: 'perspective(400px) rotateY(0)', animationTimingFunction: 'ease-out' },
+                            '40%': { transform: 'perspective(400px) translateZ(150px) rotateY(170deg)', animationTimingFunction: 'ease-out' },
+                            '50%': { transform: 'perspective(400px) translateZ(150px) rotateY(190deg) scale(1)', animationTimingFunction: 'ease-in' },
+                            '80%': { transform: 'perspective(400px) rotateY(360deg) scale(0.95)', animationTimingFunction: 'ease-in' },
+                            '100%': { transform: 'perspective(400px) scale(1)', animationTimingFunction: 'ease-in' },
+                        },
+                        swing: {
+                            '20%': { transform: 'rotate(15deg)' },
+                            '40%': { transform: 'rotate(-10deg)' },
+                            '60%': { transform: 'rotate(5deg)' },
+                            '80%': { transform: 'rotate(-5deg)' },
+                            '100%': { transform: 'rotate(0deg)' },
+                        },
+                        rubberBand: {
+                            '0%': { transform: 'scale(1)' },
+                            '30%': { transform: 'scaleX(1.25) scaleY(0.75)' },
+                            '40%': { transform: 'scaleX(0.75) scaleY(1.25)' },
+                            '60%': { transform: 'scaleX(1.15) scaleY(0.85)' },
+                            '100%': { transform: 'scale(1)' },
+                        },
+                        wobble: {
+                            '0%': { transform: 'translateX(0%)' },
+                            '15%': { transform: 'translateX(-25%) rotate(-5deg)' },
+                            '30%': { transform: 'translateX(20%) rotate(3deg)' },
+                            '45%': { transform: 'translateX(-15%) rotate(-3deg)' },
+                            '60%': { transform: 'translateX(10%) rotate(2deg)' },
+                            '75%': { transform: 'translateX(-5%) rotate(-1deg)' },
+                            '100%': { transform: 'translateX(0%)' },
+                        },
+                        jello: {
+                            '0%, 11.1%, 100%': { transform: 'translate3d(0, 0, 0)' },
+                            '22.2%': { transform: 'skewX(-12.5deg) skewY(-12.5deg)' },
+                            '33.3%': { transform: 'skewX(6.25deg) skewY(6.25deg)' },
+                            '44.4%': { transform: 'skewX(-3.125deg) skewY(-3.125deg)' },
+                            '55.5%': { transform: 'skewX(1.5625deg) skewY(1.5625deg)' },
+                            '66.6%': { transform: 'skewX(-0.78125deg) skewY(-0.78125deg)' },
+                            '77.7%': { transform: 'skewX(0.390625deg) skewY(0.390625deg)' },
+                            '88.8%': { transform: 'skewX(-0.1953125deg) skewY(-0.1953125deg)' },
+                        },
+                        heartbeat: {
+                            '0%': { transform: 'scale(1)' },
+                            '14%': { transform: 'scale(1.3)' },
+                            '28%': { transform: 'scale(1)' },
+                            '42%': { transform: 'scale(1.3)' },
+                            '70%': { transform: 'scale(1)' },
+                        },
+                        bounceIn: {
+                            '0%, 20%, 40%, 60%, 80%, 100%': { transitionTimingFunction: 'cubic-bezier(0.215, 0.610, 0.355, 1.000)' },
+                            '0%': { opacity: '0', transform: 'scale3d(0.3, 0.3, 0.3)' },
+                            '20%': { transform: 'scale3d(1.1, 1.1, 1.1)' },
+                            '40%': { transform: 'scale3d(0.9, 0.9, 0.9)' },
+                            '60%': { opacity: '1', transform: 'scale3d(1.03, 1.03, 1.03)' },
+                            '80%': { transform: 'scale3d(0.97, 0.97, 0.97)' },
+                            '100%': { opacity: '1', transform: 'scale3d(1, 1, 1)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #FDF2F1;
+        }
+        
+        .product-card:hover .product-image {
+            transform: scale(1.05);
+        }
+        
+        .product-image {
+            transition: transform 0.5s ease;
+        }
+        
+        .gradient-text {
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            background-image: linear-gradient(to right, #f35b0f, #E74C3C);
+        }
+        
+        .parallax {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        
+        .cart-badge {
+            transition: all 0.3s ease;
+        }
+        
+        .btn-cart:hover .cart-badge {
+            transform: scale(1.2);
+        }
+        
+        .nav-link::after {
+            content: '';
+            display: block;
+            width: 0;
+            height: 2px;
+            background: #f35b0f;
+            transition: width 0.3s;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .modal {
+            transition: all 0.3s ease;
+        }
+        
+        .modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .cart-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .login-form input:focus, .register-form input:focus {
+            border-color: #f35b0f;
+            box-shadow: 0 0 0 3px rgba(243, 91, 15, 0.2);
+        }
+        
+        .category-filter button.active {
+            background-color: #f35b0f;
+            color: white;
+        }
+        
+        .product-card:hover {
+            animation: rubberBand 1s;
+        }
+        
+        .feature-card:hover {
+            animation: jello 1s;
+        }
+        
+        .testimonial-card:hover {
+            animation: swing 1s;
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 opacity-0 invisible transition-all duration-300">
+        <div class="bg-white rounded-xl p-8 max-w-md w-full mx-4 animate-bounce-in">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold text-gray-800">Login</h3>
+                <button id="closeLoginModal" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            <form id="loginForm" class="login-form">
+                <div class="mb-4">
+                    <label for="loginEmail" class="block text-gray-700 mb-2">Email</label>
+                    <input type="email" id="loginEmail" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-shopify-green" required>
+                </div>
+                <div class="mb-6">
+                    <label for="loginPassword" class="block text-gray-700 mb-2">Password</label>
+                    <input type="password" id="loginPassword" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-shopify-green" required>
+                </div>
+                <button type="submit" class="w-full bg-shopify-green hover:bg-shopify-dark text-white font-bold py-2 px-4 rounded-lg transition">Login</button>
+                <p class="text-center mt-4 text-gray-600">Don't have an account? <a href="#" id="showRegister" class="text-shopify-green hover:underline">Register</a></p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div id="registerModal" class="modal fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 opacity-0 invisible transition-all duration-300">
+        <div class="bg-white rounded-xl p-8 max-w-md w-full mx-4 animate-bounce-in">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold text-gray-800">Register</h3>
+                <button id="closeRegisterModal" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            <form id="registerForm" class="register-form">
+                <div class="mb-4">
+                    <label for="registerName" class="block text-gray-700 mb-2">Full Name</label>
+                    <input type="text" id="registerName" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-shopify-green" required>
+                </div>
+                <div class="mb-4">
+                    <label for="registerEmail" class="block text-gray-700 mb-2">Email</label>
+                    <input type="email" id="registerEmail" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-shopify-green" required>
+                </div>
+                <div class="mb-4">
+                    <label for="registerPassword" class="block text-gray-700 mb-2">Password</label>
+                    <input type="password" id="registerPassword" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-shopify-green" required>
+                </div>
+                <div class="mb-6">
+                    <label for="registerConfirmPassword" class="block text-gray-700 mb-2">Confirm Password</label>
+                    <input type="password" id="registerConfirmPassword" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-shopify-green" required>
+                </div>
+                <button type="submit" class="w-full bg-shopify-green hover:bg-shopify-dark text-white font-bold py-2 px-4 rounded-lg transition">Register</button>
+                <p class="text-center mt-4 text-gray-600">Already have an account? <a href="#" id="showLogin" class="text-shopify-green hover:underline">Login</a></p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Cart Sidebar -->
+    <div id="cartSidebar" class="fixed top-0 right-0 h-full w-full md:w-96 bg-white shadow-xl z-50 transform translate-x-full transition-transform duration-300 overflow-y-auto">
+        <div class="p-6">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold text-gray-800">Your Cart</h3>
+                <button id="closeCart" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            
+            <div id="cartItems" class="mb-6">
+                <!-- Cart items will be added here dynamically -->
+                <div class="text-center py-8 text-gray-500">
+                    <i class="fas fa-shopping-cart text-4xl mb-4"></i>
+                    <p>Your cart is empty</p>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-200 pt-4 mb-4">
+                <div class="flex justify-between mb-2">
+                    <span class="text-gray-600">Subtotal:</span>
+                    <span id="cartSubtotal" class="font-bold">$0.00</span>
+                </div>
+                <div class="flex justify-between mb-2">
+                    <span class="text-gray-600">Shipping:</span>
+                    <span id="cartShipping" class="font-bold">$0.00</span>
+                </div>
+                <div class="flex justify-between mb-4">
+                    <span class="text-gray-600">Tax:</span>
+                    <span id="cartTax" class="font-bold">$0.00</span>
+                </div>
+                <div class="flex justify-between text-xl font-bold">
+                    <span>Total:</span>
+                    <span id="cartTotal" class="text-shopify-green">$0.00</span>
+                </div>
+            </div>
+            
+            <button id="checkoutBtn" class="w-full bg-shopify-green hover:bg-shopify-dark text-white font-bold py-3 px-4 rounded-lg transition mb-4">Proceed to Checkout</button>
+            <button id="continueShopping" class="w-full bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-3 px-4 rounded-lg transition">Continue Shopping</button>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="sticky top-0 z-40 bg-white shadow-md">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <a href="#" class="text-2xl font-bold text-gray-800">
+                    <i class="fas fa-store text-shopify-green mr-2"></i>
+                    <span class="gradient-text">MyShop</span>
+                </a>
+                
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="#" class="nav-link text-gray-800 font-medium hover:text-shopify-green transition">Home</a>
+                    <a href="#products" class="nav-link text-gray-800 font-medium hover:text-shopify-green transition">Products</a>
+                    <a href="#features" class="nav-link text-gray-800 font-medium hover:text-shopify-green transition">Features</a>
+                    <a href="#testimonials" class="nav-link text-gray-800 font-medium hover:text-shopify-green transition">Testimonials</a>
+                    <a href="#contact" class="nav-link text-gray-800 font-medium hover:text-shopify-green transition">Contact</a>
+                    
+                    <div class="flex items-center space-x-6">
+                        <button id="loginBtn" class="text-gray-800 hover:text-shopify-green transition">Login</button>
+                        <div class="relative">
+                            <button id="cartBtn" class="btn-cart flex items-center text-gray-800 hover:text-shopify-green transition">
+                                <i class="fas fa-shopping-cart text-xl"></i>
+                                <span id="cartCount" class="cart-badge absolute -top-3 -right-3 bg-primary text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">0</span>
+                            </button>
+                        </div>
+                    </div>
+                </nav>
+                
+                <div class="md:hidden flex items-center space-x-4">
+                    <button id="mobileCartBtn" class="relative">
+                        <i class="fas fa-shopping-cart text-xl"></i>
+                        <span id="mobileCartCount" class="cart-badge absolute -top-2 -right-2 bg-primary text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">0</span>
+                    </button>
+                    <button id="mobileMenuBtn" class="text-gray-800 focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Mobile Menu -->
+            <div id="mobileMenu" class="md:hidden hidden mt-4">
+                <div class="flex flex-col space-y-4">
+                    <a href="#" class="text-gray-800 font-medium hover:text-shopify-green transition">Home</a>
+                    <a href="#products" class="text-gray-800 font-medium hover:text-shopify-green transition">Products</a>
+                    <a href="#features" class="text-gray-800 font-medium hover:text-shopify-green transition">Features</a>
+                    <a href="#testimonials" class="text-gray-800 font-medium hover:text-shopify-green transition">Testimonials</a>
+                    <a href="#contact" class="text-gray-800 font-medium hover:text-shopify-green transition">Contact</a>
+                    <button id="mobileLoginBtn" class="text-left text-gray-800 font-medium hover:text-shopify-green transition">Login/Register</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero parallax bg-fixed bg-cover bg-center h-screen flex items-center justify-center text-center px-4" style="background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da')">
+        <div class="max-w-4xl mx-auto animate-fade-in-up">
+            <h1 class="text-4xl md:text-6xl font-bold text-white mb-6">Welcome to <span class="gradient-text">My Shop Store</span></h1>
+            <p class="text-xl md:text-2xl text-gray-200 mb-8">Discover amazing products at unbeatable prices. Quality you can trust, service you can rely on.</p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#products" class="bg-shopify-green hover:bg-shopify-dark text-white font-bold py-3 px-8 rounded-full transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl animate-heartbeat">Shop Now</a>
+                <a href="#features" class="bg-transparent border-2 border-white text-white font-bold py-3 px-8 rounded-full transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl animate-wobble">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 animate-fade-in-up" style="animation-delay: 0.1s">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Featured Products</h2>
+                <p class="max-w-2xl mx-auto text-gray-600">Check out our collection of premium products</p>
+            </div>
+            
+            <!-- Category Filters -->
+            <div class="flex flex-wrap justify-center gap-2 mb-8 animate-fade-in-up" style="animation-delay: 0.2s">
+                <button class="category-filter px-4 py-2 rounded-full bg-gray-200 text-gray-800 hover:bg-shopify-green hover:text-white transition" data-category="all">All</button>
+                <button class="category-filter px-4 py-2 rounded-full bg-gray-200 text-gray-800 hover:bg-shopify-green hover:text-white transition" data-category="electronics">Electronics</button>
+                <button class="category-filter px-4 py-2 rounded-full bg-gray-200 text-gray-800 hover:bg-shopify-green hover:text-white transition" data-category="clothing">Clothing</button>
+                <button class="category-filter px-4 py-2 rounded-full bg-gray-200 text-gray-800 hover:bg-shopify-green hover:text-white transition" data-category="accessories">Accessories</button>
+                <button class="category-filter px-4 py-2 rounded-full bg-gray-200 text-gray-800 hover:bg-shopify-green hover:text-white transition" data-category="home">Home & Living</button>
+                <button class="category-filter px-4 py-2 rounded-full bg-gray-200 text-gray-800 hover:bg-shopify-green hover:text-white transition" data-category="beauty">Beauty</button>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8" id="productsContainer">
+                <!-- Products will be loaded here from database -->
+            </div>
+            
+            <div class="text-center mt-12 animate-fade-in-up" style="animation-delay: 1s">
+                <button id="loadMore" class="inline-block bg-white border-2 border-shopify-green text-shopify-green hover:bg-shopify-green hover:text-white font-bold py-3 px-8 rounded-full transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg animate-pulse-slow">Load More Products</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 animate-fade-in-up" style="animation-delay: 0.1s">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Why Choose Us</h2>
+                <p class="max-w-2xl mx-auto text-gray-600">We provide the best shopping experience for our customers</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="feature-card bg-gray-50 p-8 rounded-xl text-center hover:shadow-lg transition-all duration-300 animate-zoom-in" style="animation-delay: 0.2s">
+                    <div class="w-16 h-16 bg-shopify-green bg-opacity-10 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-truck text-shopify-green text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Free Shipping</h3>
+                    <p class="text-gray-600">Free shipping on all orders over $50</p>
+                </div>
+                
+                <div class="feature-card bg-gray-50 p-8 rounded-xl text-center hover:shadow-lg transition-all duration-300 animate-zoom-in" style="animation-delay: 0.3s">
+                    <div class="w-16 h-16 bg-shopify-green bg-opacity-10 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-undo text-shopify-green text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Easy Returns</h3>
+                    <p class="text-gray-600">30-day return policy for all products</p>
+                </div>
+                
+                <div class="feature-card bg-gray-50 p-8 rounded-xl text-center hover:shadow-lg transition-all duration-300 animate-zoom-in" style="animation-delay: 0.4s">
+                    <div class="w-16 h-16 bg-shopify-green bg-opacity-10 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-lock text-shopify-green text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Secure Payment</h3>
+                    <p class="text-gray-600">Your payment information is secure</p>
+                </div>
+                
+                <div class="feature-card bg-gray-50 p-8 rounded-xl text-center hover:shadow-lg transition-all duration-300 animate-zoom-in" style="animation-delay: 0.5s">
+                    <div class="w-16 h-16 bg-shopify-green bg-opacity-10 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-headset text-shopify-green text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">24/7 Support</h3>
+                    <p class="text-gray-600">Dedicated support team always ready</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 animate-fade-in-up" style="animation-delay: 0.1s">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">What Our Customers Say</h2>
+                <p class="max-w-2xl mx-auto text-gray-600">Don't just take our word for it - hear from our satisfied customers</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="testimonial-card bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 animate-fade-in-up" style="animation-delay: 0.2s">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
+                            <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Sarah J." class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-800">Sarah J.</h4>
+                            <div class="flex text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 italic">"The quality of the products exceeded my expectations. Shipping was fast and customer service was excellent when I had a question."</p>
+                </div>
+                
+                <div class="testimonial-card bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 animate-fade-in-up" style="animation-delay: 0.3s">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
+                            <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Michael T." class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-800">Michael T.</h4>
+                            <div class="flex text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 italic">"I've ordered multiple times and have never been disappointed. The return policy gives me confidence to try new products."</p>
+                </div>
+                
+                <div class="testimonial-card bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 animate-fade-in-up" style="animation-delay: 0.4s">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
+                            <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Emily R." class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-800">Emily R.</h4>
+                            <div class="flex text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 italic">"The smart watch I purchased is fantastic! Battery life is great and it has all the features I need at a reasonable price."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="py-16 bg-shopify-green text-white">
+        <div class="container mx-auto px-6 text-center animate-fade-in-up">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">Subscribe to Our Newsletter</h2>
+            <p class="max-w-2xl mx-auto mb-8 text-shopify-light">Get the latest updates on new products and special offers</p>
+            
+            <form id="newsletterForm" class="max-w-md mx-auto flex flex-col sm:flex-row gap-4">
+                <input type="email" placeholder="Your email address" class="flex-grow px-4 py-3 rounded-lg focus:outline-none text-gray-800" required>
+                <button type="submit" class="bg-white text-shopify-green font-bold py-3 px-6 rounded-lg hover:bg-gray-100 transition animate-tada">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="bg-secondary text-white pt-20 pb-10">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+                <div class="animate-fade-in-up" style="animation-delay: 0.1s">
+                    <h3 class="text-xl font-bold mb-6 relative pb-2 after:absolute after:bottom-0 after:left-0 after:w-12 after:h-1 after:bg-shopify-green">MyShop</h3>
+                    <p class="mb-4 text-gray-300">Your one-stop shop for quality products at affordable prices.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-shopify-green transition"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-shopify-green transition"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-shopify-green transition"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-shopify-green transition"><i class="fab fa-pinterest"></i></a>
+                    </div>
+                </div>
+                
+                <div class="animate-fade-in-up" style="animation-delay: 0.2s">
+                    <h3 class="text-xl font-bold mb-6 relative pb-2 after:absolute after:bottom-0 after:left-0 after:w-12 after:h-1 after:bg-shopify-green">Shop</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-300 hover:text-white transition">All Products</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition">Featured</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition">New Arrivals</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition">Sale Items</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition">Best Sellers</a></li>
+                    </ul>
+                </div>
+                
+                <div class="animate-fade-in-up" style="animation-delay: 0.3s">
+                    <h3 class="text-xl font-bold mb-6 relative pb-2 after:absolute after:bottom-0 after:left-0 after:w-12 after:h-1 after:bg-shopify-green">About</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-300 hover:text-white transition">Our Story</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition">Benefits</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition">Team</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition">Careers</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition">Blog</a></li>
+                    </ul>
+                </div>
+                
+                <div class="animate-fade-in-up" style="animation-delay: 0.4s">
+                    <h3 class="text-xl font-bold mb-6 relative pb-2 after:absolute after:bottom-0 after:left-0 after:w-12 after:h-1 after:bg-shopify-green">Contact</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt mt-1 mr-3 text-shopify-green"></i>
+                            <span class="text-gray-300">23 Store Street, Shopping District, Palghar, 401404</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-phone-alt mt-1 mr-3 text-shopify-green"></i>
+                            <span class="text-gray-300">+91 8329224214</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-envelope mt-1 mr-3 text-shopify-green"></i>
+                            <span class="text-gray-300">info@myshop.com</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 pt-8 text-center text-gray-400 animate-fade-in-up" style="animation-delay: 0.5s">
+                <p>&copy; 2023 MyShop. All rights reserved. | Designed by Santosh Mahato</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Cart Button (Mobile) -->
+    <div class="fixed bottom-6 right-6 md:hidden z-50 animate-bounce">
+        <button id="mobileCartBtnFloating" class="w-16 h-16 bg-shopify-green rounded-full flex items-center justify-center shadow-xl text-white text-xl relative">
+            <i class="fas fa-shopping-cart"></i>
+            <span id="mobileCartCountFloating" class="cart-badge absolute -top-1 -right-1 bg-primary text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">0</span>
+        </button>
+    </div>
+
+    <script>
+        // Database Simulation (In a real app, this would be server-side)
+        const productsDatabase = [
+            // Electronics (20 items)
+            { id: 1, name: "Premium T-Shirt", price: 29.99, category: "clothing", image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80", tags: ["new"] },
+            { id: 2, name: "Wireless Headphones", price: 99.99, originalPrice: 129.99, category: "electronics", image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80", tags: ["sale"] },
+            { id: 3, name: "Smart Watch", price: 199.99, category: "electronics", image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+            { id: 4, name: "Leather Wallet", price: 49.99, category: "accessories", image: "https://images.unsplash.com/photo-1546868871-7041f2a55e12?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+            { id: 5, name: "Running Shoes", price: 89.99, category: "clothing", image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80", tags: ["hot"] },
+            { id: 6, name: "Bluetooth Speaker", price: 79.99, category: "electronics", image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+            { id: 7, name: "Vintage Camera", price: 149.99, category: "electronics", image: "https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+            { id: 8, name: "Travel Backpack", price: 59.99, category: "accessories", image: "https://images.unsplash.com/photo-1560343090-f0409e92791a?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80", tags: ["new"] },
+            { id: 9, name: "Smartphone X", price: 799.99, category: "electronics", image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+            { id: 10, name: "Laptop Pro", price: 1299.99, category: "electronics", image: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+            { id: 11, name: "Wireless Earbuds", price: 129.99, category: "electronics", image: "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+            { id: 12, name: "Fitness Tracker", price: 59.99, category: "electronics", image: "https://images.unsplash.com/photo-1585123388860-6a7a8d5c8f2a?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+            { id: 13, name: "4K Smart TV", price: 899.99, category: "electronics", image: "https://images.unsplash.com/photo-1571415060716-baff5f717c37?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+            { id: 14, name: "Gaming Console", price: 499.99, category: "electronics", image: "https://images.unsplash.com/photo-1607853202273-797f1c22a38e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+            { id: 15, name: "External SSD", price: 129.99, category: "electronics", image: "https://images.unsplash.com/photo-1591488320449-011701bb6704?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+            { id: 16, name: "Mechanical Keyboard", price: 89.99, category: "electronics", image: "https://images.unsplash.com/photo-1587829741301-dc798b83add3?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+            { id: 17, name: "Wireless Mouse", price: 39.99, category: "electronics", image: "https://images.unsplash.com/photo-1527814050087-3793815479db?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+            { id: 18, name: "Noise Cancelling Headphones", price: 299.99, category: "electronics", image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+            { id: 19, name: "Smart Home Hub", price: 199.99, category: "electronics", image: "https://images.unsplash.com/photo-1556740738-b6a63e27c4df?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+            { id: 20, name: "Drone Pro", price: 599.99, category: "electronics", image: "https://images.unsplash.com/photo-1579829366248-204fe8413f31?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+            
+            // Clothing (20 items)
+            { id: 21, name: "Denim Jacket", price: 69.99, category: "clothing", image: "https://images.unsplash.com/photo-1551232864-3f0890e580d9?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+            { id: 22, name: "Casual Sneakers", price: 59.99, category: "clothing", image: "https://images.unsplash.com/photo-1460353581641-37baddab0fa2?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+            { id: 23, name: "Winter Coat", price: 129.99, category: "clothing", image: "https://images.unsplash.com/photo-1529374255404-311a2a4f1fd9?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+            { id: 24, name: "Yoga Pants", price: 39.99, category: "clothing", image: "https://images.unsplash.com/photo-1583744946564-b52d01e2da64?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+            { id: 25, name: "Formal Shirt", price: 49.99, category: "clothing", image: "https://images.unsplash.com/photo-1598033129183-c4f50c736f10?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+            { id: 26, name: "Summer Dress", price: 45.99, category: "clothing", image: "https://images.unsplash.com/photo-1585487000160-6ebcfceb0d03?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+            { id: 27, name: "Leather Belt", price: 29.99, category: "clothing", image: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+            { id: 28, name: "Wool Scarf", price: 24.99, category: "clothing", image: "https://images.unsplash.com/photo-1604176354204-9268737828e4?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+            { id: 29, name: "Baseball Cap", price: 19.99, category: "clothing", image: "https://images.unsplash.com/photo-1521369909029-2afed882baee?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+            { id: 30, name: "Swim Trunks", price: 34.99, category: "clothing", image: "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+            { id: 31, name: "Hoodie", price: 54.99, category: "clothing", image: "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+            { id: 32, name: "Leather Gloves", price: 39.99, category: "clothing", image: "https://images.unsplash.com/photo-1604176354204-9268737828e4?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+            { id: 33, name: "Silk Tie", price: 29.99, category: "clothing", image: "https://images.unsplash.com/photo-1598033129183-c4f50c736f10?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+            { id: 34, name: "Cotton Socks", price: 12.99, category: "clothing", image: "https://images.unsplash.com/photo-1583744946564-b52d01e2da64?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+            { id: 35, name: "Wool Sweater", price: 79.99, category: "clothing", image: "https://images.unsplash.com/photo-1529374255404-311a2a4f1fd9?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+            { id: 36, name: "Running Shorts", price: 29.99, category: "clothing", image: "https://images.unsplash.com/photo-1460353581641-37baddab0fa2?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+            { id: 37, name: "Leather Jacket", price: 199.99, category: "clothing", image: "https://images.unsplash.com/photo-1551232864-3f0890e580d9?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+            { id: 38, name: "Winter Boots", price: 89.99, category: "clothing", image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+            { id: 39, name: "Graphic Tee", price: 24.99, category: "clothing", image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+            { id: 40, name: "Formal Pants", price: 59.99, category: "clothing", image: "https://images.unsplash.com/photo-1598033129183-c4f50c736f10?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+            
+            // Accessories (20 items)
+            { id: 41, name: "Sunglasses", price: 89.99, category: "accessories", image: "https://images.unsplash.com/photo-1511499767150-a48a237f0083?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+            { id: 42, name: "Leather Watch", price: 149.99, category: "accessories", image: "https://images.unsplash.com/photo-1523170335258-f5ed11844a49?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+            { id: 43, name: "Silver Necklace", price: 79.99, category: "accessories", image: "https://images.unsplash.com/photo-1602173574767-37ac01994b2a?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+            { id: 44, name: "Canvas Tote Bag", price: 24.99, category: "accessories", image: "https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+            { id: 45, name: "Gold Bracelet", price: 99.99, category: "accessories", image: "https://images.unsplash.com/photo-1611591437281-4608be122683?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+            { id: 46, name: "Leather Briefcase", price: 199.99, category: "accessories", image: "https://images.unsplash.com/photo-1556740738-b6a63e27c4df?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+            { id: 47, name: "Silk Scarf", price: 34.99, category: "accessories", image: "https://images.unsplash.com/photo-1604176354204-9268737828e4?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+            { id: 48, name: "Stainless Steel Water Bottle", price: 29.99, category: "accessories", image: "https://images.unsplash.com/photo-1602143407151-7111542de6e8?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+            { id: 49, name: "Wooden Watch", price: 89.99, category: "accessories", image: "https://images.unsplash.com/photo-1523170335258-f5ed11844a49?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+            { id: 50, name: "Pearl Earrings", price: 59.99, category: "accessories", image: "https://images.unsplash.com/photo-1605100804763-247f67b3557e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+            { id: 51, name: "Canvas Backpack", price: 49.99, category: "accessories", image: "https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+            { id: 52, name: "Aviator Sunglasses", price: 79.99, category: "accessories", image: "https://images.unsplash.com/photo-1511499767150-a48a237f0083?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+            { id: 53, name: "Leather Passport Holder", price: 34.99, category: "accessories", image: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+            { id: 54, name: "Silver Cufflinks", price: 49.99, category: "accessories", image: "https://images.unsplash.com/photo-1602173574767-37ac01994b2a?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+            { id: 55, name: "Wool Beanie", price: 24.99, category: "accessories", image: "https://images.unsplash.com/photo-1521369909029-2afed882baee?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+            { id: 56, name: "Leather Card Holder", price: 29.99, category: "accessories", image: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+            { id: 57, name: "Titanium Ring", price: 129.99, category: "accessories", image: "https://images.unsplash.com/photo-1605100804763-247f67b3557e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+            { id: 58, name: "Canvas Duffle Bag", price: 59.99, category: "accessories", image: "https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+            { id: 59, name: "Gold Plated Necklace", price: 89.99, category: "accessories", image: "https://images.unsplash.com/photo-1602173574767-37ac01994b2a?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+            { id: 60, name: "Leather Keychain", price: 14.99, category: "accessories", image: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+            
+            // Home & Living (20 items)
+            { id: 61, name: "Ceramic Coffee Mug", price: 19.99, category: "home", image: "https://images.unsplash.com/photo-1517256064527-09c73fc73e38?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+            { id: 62, name: "Wooden Cutting Board", price: 39.99, category: "home", image: "https://images.unsplash.com/photo-1583947581924-a6d1c5a4270f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+            { id: 63, name: "Cotton Throw Blanket", price: 49.99, category: "home", image: "https://images.unsplash.com/photo-1592078615290-033ee584e267?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+            { id: 64, name: "Glass Water Carafe", price: 29.99, category: "home", image: "https://images.unsplash.com/photo-1602143407151-7111542de6e8?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+            { id: 65, name: "Ceramic Dinner Set", price: 129.99, category: "home", image: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+            { id: 66, name: "Wooden Salad Bowl Set", price: 59.99, category: "home", image: "https://images.unsplash.com/photo-1583947581924-a6d1c5a4270f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+            { id: 67, name: "Stainless Steel Cookware Set", price: 199.99, category: "home", image: "https://images.unsplash.com/photo-1583778176476-4a8b02a64c01?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+            { id: 68, name: "Cotton Bath Towel Set", price: 39.99, category: "home", image: "https://images.unsplash.com/photo-1592078615290-033ee584e267?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+            { id: 69, name: "Ceramic Vase", price: 34.99, category: "home", image: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+            { id: 70, name: "Wooden Coasters", price: 14.99, category: "home", image: "https://images.unsplash.com/photo-1583947581924-a6d1c5a4270f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+            { id: 71, name: "Glass Food Storage Containers", price: 29.99, category: "home", image: "https://images.unsplash.com/photo-1602143407151-7111542de6e8?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+            { id: 72, name: "Ceramic Teapot", price: 39.99, category: "home", image: "https://images.unsplash.com/photo-1517256064527-09c73fc73e38?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+            { id: 73, name: "Wooden Utensil Set", price: 24.99, category: "home", image: "https://images.unsplash.com/photo-1583947581924-a6d1c5a4270f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+            { id: 74, name: "Cotton Table Runner", price: 19.99, category: "home", image: "https://images.unsplash.com/photo-1592078615290-033ee584e267?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+            { id: 75, name: "Glass Pitcher", price: 24.99, category: "home", image: "https://images.unsplash.com/photo-1602143407151-7111542de6e8?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+            { id: 76, name: "Ceramic Serving Bowl", price: 29.99, category: "home", image: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+            { id: 77, name: "Wooden Bread Box", price: 49.99, category: "home", image: "https://images.unsplash.com/photo-1583947581924-a6d1c5a4270f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+            { id: 78, name: "Cotton Napkin Set", price: 19.99, category: "home", image: "https://images.unsplash.com/photo-1592078615290-033ee584e267?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+            { id: 79, name: "Glass Salt and Pepper Shakers", price: 14.99, category: "home", image: "https://images.unsplash.com/photo-1602143407151-7111542de6e8?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+            { id: 80, name: "Ceramic Spoon Rest", price: 9.99, category: "home", image: "https://images.unsplash.com/photo-1517256064527-09c73fc73e38?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+            
+            // Beauty (20 items)
+            { id: 81, name: "Vitamin C Serum", price: 29.99, category: "beauty", image: "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+            { id: 82, name: "Hyaluronic Acid Moisturizer", price: 24.99, category: "beauty", image: "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+            { id: 83, name: "Charcoal Face Mask", price: 19.99, category: "beauty", image: "https://images.unsplash.com/photo-1556228578-8c89e6adf883?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+            { id: 84, name: "Rose Water Toner", price: 14.99, category: "beauty", image: "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+            { id: 85, name: "Retinol Night Cream", price: 34.99, category: "beauty", image: "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+            { id: 86, name: "Jade Facial Roller", price: 19.99, category: "beauty", image: "https://images.unsplash.com/photo-1585238342024-78d387f4a707?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+            { id: 87, name: "Bamboo Toothbrush Set", price: 12.99, category: "beauty", image: "https://images.unsplash.com/photo-1583947581924-a6d1c5a4270f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+            { id: 88, name: "Lavender Body Wash", price: 16.99, category: "beauty", image: "https://images.unsplash.com/photo-1556228578-8c89e6adf883?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+            { id: 89, name: "Coconut Oil Hair Mask", price: 14.99, category: "beauty", image: "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+            { id: 90, name: "Tea Tree Face Wash", price: 12.99, category: "beauty", image: "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+            { id: 91, name: "Aloe Vera Gel", price: 9.99, category: "beauty", image: "https://images.unsplash.com/photo-1556228578-8c89e6adf883?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+            { id: 92, name: "Bamboo Makeup Brushes", price: 24.99, category: "beauty", image: "https://images.unsplash.com/photo-1585238342024-78d387f4a707?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+            { id: 93, name: "Rosehip Oil", price: 19.99, category: "beauty", image: "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+            { id: 94, name: "Clay Face Mask", price: 14.99, category: "beauty", image: "https://images.unsplash.com/photo-1556228578-8c89e6adf883?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+            { id: 95, name: "Bamboo Hair Comb", price: 9.99, category: "beauty", image: "https://images.unsplash.com/photo-1583947581924-a6d1c5a4270f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+            { id: 96, name: "Peppermint Foot Cream", price: 12.99, category: "beauty", image: "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+            { id: 97, name: "Charcoal Toothpaste", price: 8.99, category: "beauty", image: "https://images.unsplash.com/photo-1556228578-8c89e6adf883?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+            { id: 98, name: "Bamboo Cotton Pads", price: 7.99, category: "beauty", image: "https://images.unsplash.com/photo-1583947581924-a6d1c5a4270f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+            { id: 99, name: "Lavender Hand Cream", price: 9.99, category: "beauty", image: "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" },
+            { id: 100, name: "Tea Tree Shampoo", price: 14.99, category: "beauty", image: "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" }
+        ];
+
+        // Cart functionality
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        
+        // User authentication simulation
+        let currentUser = JSON.parse(localStorage.getItem('currentUser')) || null;
+        
+        // DOM Elements
+        const productsContainer = document.getElementById('productsContainer');
+        const cartItemsContainer = document.getElementById('cartItems');
+        const cartCountElements = document.querySelectorAll('.cart-badge, #cartCount, #mobileCartCount, #mobileCartCountFloating');
+        const cartSubtotal = document.getElementById('cartSubtotal');
+        const cartShipping = document.getElementById('cartShipping');
+        const cartTax = document.getElementById('cartTax');
+        const cartTotal = document.getElementById('cartTotal');
+        const loginBtn = document.getElementById('loginBtn');
+        const mobileLoginBtn = document.getElementById('mobileLoginBtn');
+        const cartBtn = document.getElementById('cartBtn');
+        const mobileCartBtn = document.getElementById('mobileCartBtn');
+        const mobileCartBtnFloating = document.getElementById('mobileCartBtnFloating');
+        const closeCart = document.getElementById('closeCart');
+        const continueShopping = document.getElementById('continueShopping');
+        const checkoutBtn = document.getElementById('checkoutBtn');
+        const loginModal = document.getElementById('loginModal');
+        const registerModal = document.getElementById('registerModal');
+        const closeLoginModal = document.getElementById('closeLoginModal');
+        const closeRegisterModal = document.getElementById('closeRegisterModal');
+        const showRegister = document.getElementById('showRegister');
+        const showLogin = document.getElementById('showLogin');
+        const loginForm = document.getElementById('loginForm');
+        const registerForm = document.getElementById('registerForm');
+        const loadMoreBtn = document.getElementById('loadMore');
+        const categoryFilters = document.querySelectorAll('.category-filter');
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const newsletterForm = document.getElementById('newsletterForm');
+        
+        // Variables
+        let currentPage = 1;
+        const productsPerPage = 8;
+        let currentCategory = 'all';
+        
+        // Initialize the page
+        function init() {
+            renderProducts();
+            updateCartCount();
+            checkLoginStatus();
+            setupEventListeners();
+        }
+        
+        // Render products based on current page and category
+        function renderProducts() {
+            const startIndex = (currentPage - 1) * productsPerPage;
+            const endIndex = startIndex + productsPerPage;
+            
+            // Filter products by category
+            let filteredProducts = productsDatabase;
+            if (currentCategory !== 'all') {
+                filteredProducts = productsDatabase.filter(product => product.category === currentCategory);
+            }
+            
+            // Get products for current page
+            const productsToShow = filteredProducts.slice(startIndex, endIndex);
+            
+            // Clear container if it's the first page
+            if (currentPage === 1) {
+                productsContainer.innerHTML = '';
+            }
+            
+            // Add products to container
+            productsToShow.forEach(product => {
+                const productCard = createProductCard(product);
+                productsContainer.appendChild(productCard);
+            });
+            
+            // Show/hide load more button
+            if (endIndex >= filteredProducts.length) {
+                loadMoreBtn.style.display = 'none';
+            } else {
+                loadMoreBtn.style.display = 'inline-block';
+            }
+        }
+        
+        // Create product card HTML
+        function createProductCard(product) {
+            const productCard = document.createElement('div');
+            productCard.className = `product-card bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl animate-fade-in-up`;
+            productCard.dataset.category = product.category;
+            productCard.dataset.id = product.id;
+            
+            let badge = '';
+            if (product.tags && product.tags.includes('new')) {
+                badge = '<div class="absolute top-4 right-4 bg-primary text-white text-xs font-bold px-2 py-1 rounded-full">NEW</div>';
+            } else if (product.tags && product.tags.includes('sale')) {
+                badge = '<div class="absolute top-4 right-4 bg-primary text-white text-xs font-bold px-2 py-1 rounded-full">SALE</div>';
+            } else if (product.tags && product.tags.includes('hot')) {
+                badge = '<div class="absolute top-4 right-4 bg-primary text-white text-xs font-bold px-2 py-1 rounded-full">HOT</div>';
+            }
+            
+            let priceHtml = `<span class="text-shopify-green font-bold">$${product.price.toFixed(2)}</span>`;
+            if (product.originalPrice) {
+                priceHtml = `
+                    <div>
+                        <span class="text-gray-400 line-through mr-2">$${product.originalPrice.toFixed(2)}</span>
+                        ${priceHtml}
+                    </div>
+                `;
+            }
+            
+            productCard.innerHTML = `
+                <div class="relative overflow-hidden h-64">
+                    <img src="${product.image}" alt="${product.name}" class="product-image w-full h-full object-cover">
+                    ${badge}
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-start">
+                        <h3 class="text-lg font-bold text-gray-800 mb-2">${product.name}</h3>
+                        ${priceHtml}
+                    </div>
+                    <p class="text-gray-600 text-sm mb-4">${getProductDescription(product.category)}</p>
+                    <button class="add-to-cart w-full bg-shopify-green hover:bg-shopify-dark text-white font-medium py-2 px-4 rounded-lg transition-all duration-300" data-id="${product.id}">Add to Cart</button>
+                </div>
+            `;
+            
+            return productCard;
+        }
+        
+        // Get product description based on category
+        function getProductDescription(category) {
+            const descriptions = {
+                electronics: "High-quality electronics with warranty",
+                clothing: "Premium quality fabric and materials",
+                accessories: "Stylish and durable accessories",
+                home: "Beautiful and functional home items",
+                beauty: "Natural and effective beauty products"
+            };
+            return descriptions[category] || "Premium product with excellent quality";
+        }
+        
+        // Update cart count in UI
+        function updateCartCount() {
+            const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+            cartCountElements.forEach(el => {
+                el.textContent = totalItems;
+                if (totalItems > 0) {
+                    el.classList.add('animate-pulse');
+                    setTimeout(() => el.classList.remove('animate-pulse'), 500);
+                }
+            });
+            
+            // Save cart to localStorage
+            localStorage.setItem('cart', JSON.stringify(cart));
+        }
+        
+        // Render cart items
+        function renderCartItems() {
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = `
+                    <div class="text-center py-8 text-gray-500">
+                        <i class="fas fa-shopping-cart text-4xl mb-4"></i>
+                        <p>Your cart is empty</p>
+                    </div>
+                `;
+                cartSubtotal.textContent = '$0.00';
+                cartShipping.textContent = '$0.00';
+                cartTax.textContent = '$0.00';
+                cartTotal.textContent = '$0.00';
+                checkoutBtn.disabled = true;
+                return;
+            }
+            
+            checkoutBtn.disabled = false;
+            
+            let itemsHtml = '';
+            let subtotal = 0;
+            
+            cart.forEach(item => {
+                const product = productsDatabase.find(p => p.id === item.id);
+                if (product) {
+                    const itemTotal = product.price * item.quantity;
+                    subtotal += itemTotal;
+                    
+                    itemsHtml += `
+                        <div class="cart-item flex items-center justify-between py-4 border-b border-gray-200 transition-all duration-300">
+                            <div class="flex items-center">
+                                <img src="${product.image}" alt="${product.name}" class="w-16 h-16 object-cover rounded-lg mr-4">
+                                <div>
+                                    <h4 class="font-medium text-gray-800">${product.name}</h4>
+                                    <p class="text-sm text-gray-600">$${product.price.toFixed(2)} x ${item.quantity}</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="font-medium text-gray-800 mr-4">$${itemTotal.toFixed(2)}</span>
+                                <div class="flex items-center">
+                                    <button class="decrease-quantity w-8 h-8 flex items-center justify-center bg-gray-200 rounded-full hover:bg-gray-300 transition" data-id="${product.id}">
+                                        <i class="fas fa-minus text-xs"></i>
+                                    </button>
+                                    <span class="mx-2 w-6 text-center">${item.quantity}</span>
+                                    <button class="increase-quantity w-8 h-8 flex items-center justify-center bg-gray-200 rounded-full hover:bg-gray-300 transition" data-id="${product.id}">
+                                        <i class="fas fa-plus text-xs"></i>
+                                    </button>
+                                </div>
+                                <button class="remove-item ml-4 text-gray-500 hover:text-red-500 transition" data-id="${product.id}">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                }
+            });
+            
+            cartItemsContainer.innerHTML = itemsHtml;
+            
+            // Calculate totals
+            const shipping = subtotal > 50 ? 0 : 5.99;
+            const tax = subtotal * 0.1; // 10% tax
+            
+            cartSubtotal.textContent = `$${subtotal.toFixed(2)}`;
+            cartShipping.textContent = shipping === 0 ? 'FREE' : `$${shipping.toFixed(2)}`;
+            cartTax.textContent = `$${tax.toFixed(2)}`;
+            cartTotal.textContent = `$${(subtotal + shipping + tax).toFixed(2)}`;
+            
+            // Add event listeners to cart item buttons
+            document.querySelectorAll('.increase-quantity').forEach(button => {
+                button.addEventListener('click', function() {
+                    const productId = parseInt(this.dataset.id);
+                    increaseQuantity(productId);
+                });
+            });
+            
+            document.querySelectorAll('.decrease-quantity').forEach(button => {
+                button.addEventListener('click', function() {
+                    const productId = parseInt(this.dataset.id);
+                    decreaseQuantity(productId);
+                });
+            });
+            
+            document.querySelectorAll('.remove-item').forEach(button => {
+                button.addEventListener('click', function() {
+                    const productId = parseInt(this.dataset.id);
+                    removeFromCart(productId);
+                });
+            });
+        }
+        
+        // Add to cart function
+        function addToCart(productId) {
+            const product = productsDatabase.find(p => p.id === productId);
+            if (!product) return;
+            
+            const existingItem = cart.find(item => item.id === productId);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    id: productId,
+                    quantity: 1
+                });
+            }
+            
+            updateCartCount();
+            renderCartItems();
+            
+            // Show success message
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: `${product.name} added to cart`,
+                showConfirmButton: false,
+                timer: 1000,
+                toast: true
+            });
+        }
+        
+        // Increase quantity
+        function increaseQuantity(productId) {
+            const item = cart.find(item => item.id === productId);
+            if (item) {
+                item.quantity += 1;
+                updateCartCount();
+                renderCartItems();
+            }
+        }
+        
+        // Decrease quantity
+        function decreaseQuantity(productId) {
+            const itemIndex = cart.findIndex(item => item.id === productId);
+            if (itemIndex !== -1) {
+                if (cart[itemIndex].quantity > 1) {
+                    cart[itemIndex].quantity -= 1;
+                } else {
+                    cart.splice(itemIndex, 1);
+                }
+                updateCartCount();
+                renderCartItems();
+            }
+        }
+        
+        // Remove from cart
+        function removeFromCart(productId) {
+            const itemIndex = cart.findIndex(item => item.id === productId);
+            if (itemIndex !== -1) {
+                cart.splice(itemIndex, 1);
+                updateCartCount();
+                renderCartItems();
+                
+                // Show removed message
+                const product = productsDatabase.find(p => p.id === productId);
+                if (product) {
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'info',
+                        title: `${product.name} removed from cart`,
+                        showConfirmButton: false,
+                        timer: 1000,
+                        toast: true
+                    });
+                }
+            }
+        }
+        
+        // Check login status
+        function checkLoginStatus() {
+            if (currentUser) {
+                loginBtn.textContent = currentUser.name;
+                mobileLoginBtn.textContent = 'My Account';
+            } else {
+                loginBtn.textContent = 'Login';
+                mobileLoginBtn.textContent = 'Login/Register';
+            }
+        }
+        
+        // Setup event listeners
+        function setupEventListeners() {
+            // Add to cart buttons
+            document.addEventListener('click', function(e) {
+                if (e.target.classList.contains('add-to-cart') || e.target.closest('.add-to-cart')) {
+                    const button = e.target.classList.contains('add-to-cart') ? e.target : e.target.closest('.add-to-cart');
+                    const productId = parseInt(button.dataset.id);
+                    addToCart(productId);
+                    
+                    // Button animation
+                    button.innerHTML = '<i class="fas fa-check"></i> Added!';
+                    button.classList.add('bg-primary');
+                    setTimeout(() => {
+                        button.innerHTML = 'Add to Cart';
+                        button.classList.remove('bg-primary');
+                    }, 1000);
+                }
+            });
+            
+            // Cart buttons
+            cartBtn.addEventListener('click', function() {
+                document.getElementById('cartSidebar').classList.add('translate-x-0');
+                document.body.classList.add('overflow-hidden');
+                renderCartItems();
+            });
+            
+            mobileCartBtn.addEventListener('click', function() {
+                document.getElementById('cartSidebar').classList.add('translate-x-0');
+                document.body.classList.add('overflow-hidden');
+                renderCartItems();
+            });
+            
+            mobileCartBtnFloating.addEventListener('click', function() {
+                document.getElementById('cartSidebar').classList.add('translate-x-0');
+                document.body.classList.add('overflow-hidden');
+                renderCartItems();
+            });
+            
+            closeCart.addEventListener('click', function() {
+                document.getElementById('cartSidebar').classList.remove('translate-x-0');
+                document.body.classList.remove('overflow-hidden');
+            });
+            
+            continueShopping.addEventListener('click', function() {
+                document.getElementById('cartSidebar').classList.remove('translate-x-0');
+                document.body.classList.remove('overflow-hidden');
+            });
+            
+            checkoutBtn.addEventListener('click', function() {
+                if (!currentUser) {
+                    showLoginModal();
+                    Swal.fire({
+                        icon: 'info',
+                        title: 'Please login to checkout',
+                        text: 'You need to be logged in to proceed with your purchase',
+                        confirmButtonColor: '#f35b0f'
+                    });
+                    return;
+                }
+                
+                // In a real app, this would redirect to checkout page
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Order Placed!',
+                    text: 'Thank you for your purchase. Your order has been placed successfully.',
+                    confirmButtonColor: '#f35b0f'
+                });
+                
+                // Clear cart
+                cart = [];
+                updateCartCount();
+                renderCartItems();
+                document.getElementById('cartSidebar').classList.remove('translate-x-0');
+                document.body.classList.remove('overflow-hidden');
+            });
+            
+            // Login/Register modals
+            loginBtn.addEventListener('click', showLoginModal);
+            mobileLoginBtn.addEventListener('click', showLoginModal);
+            
+            closeLoginModal.addEventListener('click', hideLoginModal);
+            closeRegisterModal.addEventListener('click', hideRegisterModal);
+            showRegister.addEventListener('click', function(e) {
+                e.preventDefault();
+                hideLoginModal();
+                showRegisterModal();
+            });
+            
+            showLogin.addEventListener('click', function(e) {
+                e.preventDefault();
+                hideRegisterModal();
+                showLoginModal();
+            });
+            
+            // Login form
+            loginForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const email = document.getElementById('loginEmail').value;
+                const password = document.getElementById('loginPassword').value;
+                
+                // In a real app, this would be a server-side authentication
+                if (email && password) {
+                    currentUser = {
+                        email: email,
+                        name: email.split('@')[0]
+                    };
+                    localStorage.setItem('currentUser', JSON.stringify(currentUser));
+                    checkLoginStatus();
+                    hideLoginModal();
+                    
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Login Successful',
+                        text: `Welcome back, ${currentUser.name}!`,
+                        confirmButtonColor: '#f35b0f'
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Login Failed',
+                        text: 'Please enter both email and password',
+                        confirmButtonColor: '#f35b0f'
+                    });
+                }
+            });
+            
+            // Register form
+            registerForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const name = document.getElementById('registerName').value;
+                const email = document.getElementById('registerEmail').value;
+                const password = document.getElementById('registerPassword').value;
+                const confirmPassword = document.getElementById('registerConfirmPassword').value;
+                
+                if (password !== confirmPassword) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Registration Failed',
+                        text: 'Passwords do not match',
+                        confirmButtonColor: '#f35b0f'
+                    });
+                    return;
+                }
+                
+                if (name && email && password) {
+                    currentUser = {
+                        name: name,
+                        email: email
+                    };
+                    localStorage.setItem('currentUser', JSON.stringify(currentUser));
+                    checkLoginStatus();
+                    hideRegisterModal();
+                    
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Registration Successful',
+                        text: `Welcome, ${name}! You can now login with your credentials.`,
+                        confirmButtonColor: '#f35b0f'
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Registration Failed',
+                        text: 'Please fill in all fields',
+                        confirmButtonColor: '#f35b0f'
+                    });
+                }
+            });
+            
+            // Load more products
+            loadMoreBtn.addEventListener('click', function() {
+                currentPage += 1;
+                renderProducts();
+                
+                // Scroll to bottom of products container
+                setTimeout(() => {
+                    productsContainer.scrollIntoView({ behavior: 'smooth', block: 'end' });
+                }, 300);
+            });
+            
+            // Category filters
+            categoryFilters.forEach(filter => {
+                filter.addEventListener('click', function() {
+                    // Remove active class from all filters
+                    categoryFilters.forEach(f => f.classList.remove('active'));
+                    
+                    // Add active class to clicked filter
+                    this.classList.add('active');
+                    
+                    // Update current category
+                    currentCategory = this.dataset.category;
+                    currentPage = 1;
+                    
+                    // Re-render products
+                    renderProducts();
+                    
+                    // Scroll to products section
+                    document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
+                });
+            });
+            
+            // Mobile menu toggle
+            mobileMenuBtn.addEventListener('click', function() {
+                mobileMenu.classList.toggle('hidden');
+            });
+            
+            // Newsletter form
+            newsletterForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const emailInput = this.querySelector('input[type="email"]');
+                const email = emailInput.value;
+                
+                if (email) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Subscribed!',
+                        text: 'Thank you for subscribing to our newsletter.',
+                        confirmButtonColor: '#f35b0f'
+                    });
+                    emailInput.value = '';
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Please enter a valid email address',
+                        confirmButtonColor: '#f35b0f'
+                    });
+                }
+            });
+        }
+        
+        // Show login modal
+        function showLoginModal() {
+            loginModal.classList.add('opacity-100', 'visible');
+            document.body.classList.add('overflow-hidden');
+        }
+        
+        // Hide login modal
+        function hideLoginModal() {
+            loginModal.classList.remove('opacity-100', 'visible');
+            document.body.classList.remove('overflow-hidden');
+        }
+        
+        // Show register modal
+        function showRegisterModal() {
+            registerModal.classList.add('opacity-100', 'visible');
+            document.body.classList.add('overflow-hidden');
+        }
+        
+        // Hide register modal
+        function hideRegisterModal() {
+            registerModal.classList.remove('opacity-100', 'visible');
+            document.body.classList.remove('overflow-hidden');
+        }
+        
+        // Initialize the app
+        init();
+        
+        // Scroll animations
+        const animateOnScroll = () => {
+            const elements = document.querySelectorAll('.animate-fade-in-up, .animate-zoom-in');
+            
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.2;
+                
+                if (elementPosition < screenPosition) {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0) scale(1)';
+                }
+            });
+        };
+        
+        window.addEventListener('scroll', animateOnScroll);
+        window.addEventListener('load', animateOnScroll);
+    </script>
+</body>
+</html>
